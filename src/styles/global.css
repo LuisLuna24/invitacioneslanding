@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #0B0F19;
+  --color-night-900: #101626;
+  --color-night-800: #141A2A;
+  --color-night-700: #1E263B;
+  --color-night-600: #29344E;
+
+  --color-gold-300: #F5E8C9;
+  --color-gold-400: #E5D3B3;
+  --color-gold-500: #C9A876;
+  --color-gold-600: #B28F5A;
+
+  --color-lavender-300: #C4BCF2;
+  --color-lavender-400: #A79CE5;
+  --color-lavender-500: #8B7FD6;
+  --color-lavender-600: #6B5EB8;
+
+  --color-warm-white: #F5F3EE;
+  --color-muted-silver: #A9A8B3;
+
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0B0F19;
+  color: #F5F3EE;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0B0F19;
+  color: #F5F3EE;
+  overflow-x: hidden;
+  selection-background-color: #C9A876;
+  selection-color: #0B0F19;
+}
+
+::selection {
+  background-color: rgba(201, 168, 118, 0.35);
+  color: #F5F3EE;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E263B;
+  border-radius: 9999px;
+  border: 2px solid #0B0F19;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A876;
+}
+
+/* Glow effects & utilities */
+.glow-gold {
+  box-shadow: 0 0 25px -4px rgba(201, 168, 118, 0.35), 0 0 10px -2px rgba(201, 168, 118, 0.2);
+}
+
+.glow-lavender {
+  box-shadow: 0 0 30px -4px rgba(139, 127, 214, 0.35), 0 0 12px -2px rgba(139, 127, 214, 0.2);
+}
+
+.glow-subtle {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 15px -3px rgba(201, 168, 118, 0.15);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #F5E8C9 0%, #C9A876 50%, #E5D3B3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-luna {
+  background: linear-gradient(135deg, #F5F3EE 10%, #C9A876 50%, #A79CE5 95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient-gold {
+  border-image: linear-gradient(to bottom right, rgba(201, 168, 118, 0.5), rgba(139, 127, 214, 0.2)) 1;
+}
+
+/* Star background animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.9); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}

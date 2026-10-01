@@ -1,0 +1,204 @@
+---
+import GlowOrb from "../common/GlowOrb.astro";
+
+const defaultWhatsappUrl = "https://wa.me/525610683465?text=Hola,%20quiero%20cotizar%20una%20invitaci%C3%B3n%20digital";
+const mailtoUrl = "mailto:lued18961@gmail.com?subject=Cotizaci%C3%B3n%20de%20Invitaci%C3%B3n%20Digital%20-%20Lunaweb&body=Hola%20equipo%20de%20Lunaweb,%0A%0AMe%20gustar%C3%ADa%20cotizar%20una%20invitaci%C3%B3n%20digital%20para%20mi%20evento.%0A%0ATipo%20de%20evento:%20%0AFecha%20aproximada:%20%0ANombre%20del%20festejado(s):%20%0A%0ASaludos!";
+---
+
+<section id="contacto" class="relative py-28 bg-night-950 overflow-hidden">
+  <!-- Dramatic lunar glows -->
+  <GlowOrb color="gold" size="xl" className="top-1/4 -right-24 opacity-30" />
+  <GlowOrb color="lavender" size="xl" className="-bottom-20 -left-20 opacity-30" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Title -->
+    <div class="text-center max-w-3xl mx-auto mb-16 contact-header">
+      <span class="inline-block text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
+        Hablemos de tu gran día
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-warm-white tracking-tight">
+        ¿Listo para crear una invitación <br />
+        <span class="text-gradient-luna font-bold italic">completamente mágica</span>?
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-muted-silver font-light">
+        Contáctanos directamente. Te asesoramos con ideas, referencias visuales y resolvemos todas tus preguntas sin compromiso.
+      </p>
+    </div>
+
+    <!-- Two Big Prominent CTA Buttons (Main Request) -->
+    <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16 contact-buttons">
+      
+      <!-- Primary Big Button: WhatsApp -->
+      <a
+        href={defaultWhatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="relative group p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-night-900 via-night-800 to-night-900 border-2 border-gold-500/50 hover:border-gold-400 shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_25px_rgba(201,168,118,0.25)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_40px_rgba(201,168,118,0.4)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center justify-center overflow-hidden"
+      >
+        <!-- Luminous glow corner -->
+        <div class="absolute -right-8 -top-8 w-28 h-28 bg-gold-500/20 rounded-full blur-2xl group-hover:bg-gold-500/35 transition-all"></div>
+
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-gold-500 to-gold-400 text-night-950 flex items-center justify-center shadow-lg shadow-gold-500/30 mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.044.072.044.419-.1 1.024z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.66 1.443 5.176L2 22l4.981-1.306C8.423 21.535 10.154 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25c-1.637 0-3.15-.466-4.437-1.272l-.318-.2-2.964.777.791-2.89-.208-.331C3.993 14.996 3.5 13.546 3.5 12c0-4.687 3.813-8.5 8.5-8.5 4.687 0 8.5 3.813 8.5 8.5 0 4.688-3.813 8.5-8.5 8.5z"/>
+          </svg>
+        </div>
+
+        <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold mb-1">Respuesta inmediata</span>
+        <h3 class="font-serif text-2xl font-bold text-warm-white group-hover:text-gold-300 transition-colors">
+          Escríbenos por WhatsApp
+        </h3>
+        <p class="text-xs sm:text-sm text-muted-silver mt-1.5 mb-4 font-light">
+          +52 56 1068 3465 · Chatea con un diseñador ahora
+        </p>
+
+        <span class="inline-flex items-center gap-2 text-xs font-bold text-night-950 bg-gold-400 group-hover:bg-gold-300 px-4 py-2 rounded-full transition-colors">
+          <span>Abrir WhatsApp</span>
+          <svg class="w-3.5 h-3.5 text-night-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </span>
+      </a>
+
+      <!-- Secondary Big Button: Correo -->
+      <a
+        href={mailtoUrl}
+        class="relative group p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-night-900 via-night-800 to-night-900 border-2 border-lavender-500/40 hover:border-lavender-400 shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_25px_rgba(139,127,214,0.2)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_35px_rgba(139,127,214,0.35)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center justify-center overflow-hidden"
+      >
+        <!-- Luminous glow corner -->
+        <div class="absolute -right-8 -top-8 w-28 h-28 bg-lavender-500/20 rounded-full blur-2xl group-hover:bg-lavender-500/35 transition-all"></div>
+
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-lavender-500 to-lavender-400 text-night-950 flex items-center justify-center shadow-lg shadow-lavender-500/30 mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+
+        <span class="text-xs uppercase tracking-widest text-lavender-300 font-semibold mb-1">Cotización formal</span>
+        <h3 class="font-serif text-2xl font-bold text-warm-white group-hover:text-lavender-300 transition-colors">
+          Escríbenos por correo
+        </h3>
+        <p class="text-xs sm:text-sm text-muted-silver mt-1.5 mb-4 font-light">
+          lued18961@gmail.com · Respuesta en menos de 24h
+        </p>
+
+        <span class="inline-flex items-center gap-2 text-xs font-bold text-night-950 bg-lavender-400 group-hover:bg-lavender-300 px-4 py-2 rounded-full transition-colors">
+          <span>Enviar correo</span>
+          <svg class="w-3.5 h-3.5 text-night-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </span>
+      </a>
+
+    </div>
+
+    <!-- Mini Interactive Visual Form / Quick WhatsApp Quote Builder -->
+    <div
+      class="max-w-2xl mx-auto p-8 sm:p-10 rounded-3xl bg-night-900/90 border border-night-700/80 backdrop-blur-xl shadow-2xl relative"
+      x-data="{
+        eventType: 'XV Años',
+        celebrantName: '',
+        eventDate: '',
+        comments: '',
+        sendCustomWhatsapp() {
+          let msg = `Hola Lunaweb, quiero cotizar una invitación digital.%0A%0A*Evento:* ${encodeURIComponent(this.eventType)}`;
+          if (this.celebrantName) msg += `%0A*Festejado(a):* ${encodeURIComponent(this.celebrantName)}`;
+          if (this.eventDate) msg += `%0A*Fecha estimada:* ${encodeURIComponent(this.eventDate)}`;
+          if (this.comments) msg += `%0A*Detalles:* ${encodeURIComponent(this.comments)}`;
+          window.open(`https://wa.me/525610683465?text=${msg}`, '_blank');
+        }
+      }"
+    >
+      <div class="text-center mb-8">
+        <h4 class="font-serif text-2xl font-semibold text-warm-white">
+          O personaliza tu mensaje directo a WhatsApp
+        </h4>
+        <p class="text-xs sm:text-sm text-muted-silver mt-1 font-light">
+          Completa los datos de tu evento y abriremos el chat con tu información organizada.
+        </p>
+      </div>
+
+      <form @submit.prevent="sendCustomWhatsapp()" class="space-y-5">
+        <!-- Event Type -->
+        <div>
+          <label class="block text-xs font-medium uppercase tracking-wider text-gold-400 mb-2">
+            Tipo de evento
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <template x-for="type in ['XV Años', 'Boda', 'Bautizo', 'Cumpleaños']" :key="type">
+              <button
+                type="button"
+                @click="eventType = type"
+                :class="eventType === type ? 'bg-gold-500 text-night-950 font-bold border-gold-400 shadow-sm' : 'bg-night-950 text-muted-silver border-night-700 hover:text-warm-white'"
+                class="py-2.5 px-3 rounded-xl border text-xs text-center transition-all cursor-pointer"
+                x-text="type"
+              ></button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Celebrant Name & Date in 2 columns -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-warm-white mb-1.5" for="form-name">
+              Nombre del festejado(a) o pareja
+            </label>
+            <input
+              id="form-name"
+              type="text"
+              x-model="celebrantName"
+              placeholder="Ej. Sofía / Valentina & Mateo"
+              class="w-full px-4 py-3 rounded-xl bg-night-950 border border-night-700 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 text-warm-white text-sm outline-none transition-colors"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-warm-white mb-1.5" for="form-date">
+              Fecha estimada del evento
+            </label>
+            <input
+              id="form-date"
+              type="text"
+              x-model="eventDate"
+              placeholder="Ej. Noviembre 2026"
+              class="w-full px-4 py-3 rounded-xl bg-night-950 border border-night-700 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 text-warm-white text-sm outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        <!-- Notes / Comments -->
+        <div>
+          <label class="block text-xs font-medium text-warm-white mb-1.5" for="form-comments">
+            ¿Tienes alguna temática, colores o detalles en mente? (Opcional)
+          </label>
+          <textarea
+            id="form-comments"
+            rows="2"
+            x-model="comments"
+            placeholder="Ej. Colores azul noche con dorado, incluir música instrumental y mesa de regalos..."
+            class="w-full px-4 py-3 rounded-xl bg-night-950 border border-night-700 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 text-warm-white text-sm outline-none transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Submit to WhatsApp Button -->
+        <button
+          type="submit"
+          class="w-full py-4 rounded-xl text-base font-semibold text-night-950 bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400 hover:from-gold-300 hover:to-gold-400 shadow-[0_0_25px_rgba(201,168,118,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+        >
+          <svg class="w-5 h-5 text-night-950" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.044.072.044.419-.1 1.024z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.66 1.443 5.176L2 22l4.981-1.306C8.423 21.535 10.154 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25c-1.637 0-3.15-.466-4.437-1.272l-.318-.2-2.964.777.791-2.89-.208-.331C3.993 14.996 3.5 13.546 3.5 12c0-4.687 3.813-8.5 8.5-8.5 4.687 0 8.5 3.813 8.5 8.5 0 4.688-3.813 8.5-8.5 8.5z"/>
+          </svg>
+          <span>Cotizar por WhatsApp con estos datos</span>
+        </button>
+
+        <p class="text-center text-[11px] text-muted-silver/70">
+          Tus datos se utilizan únicamente para responder a tu cotización según nuestro <a href="/privacidad" class="underline hover:text-gold-400">Aviso de Privacidad</a>.
+        </p>
+      </form>
+    </div>
+
+  </div>
+</section>

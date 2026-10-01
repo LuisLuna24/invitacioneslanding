@@ -1,0 +1,356 @@
+---
+import { CATALOG_ITEMS, CATALOG_CATEGORIES, CATALOG_STYLES } from "../../data/catalog";
+import GlowOrb from "../common/GlowOrb.astro";
+
+const totalCount = CATALOG_ITEMS.length;
+---
+
+<div
+  class="relative"
+  x-data={`{
+    searchQuery: '',
+    selectedCategory: 'Todos',
+    selectedStyle: 'Todos',
+    sortBy: 'featured',
+    items: ${JSON.stringify(CATALOG_ITEMS)},
+
+    get filteredItems() {
+      let result = this.items.filter(item => {
+        // Category check
+        const matchCategory = (this.selectedCategory === 'Todos') ||
+          (this.selectedCategory === 'Bodas' && item.category === 'Boda') ||
+          (this.selectedCategory === item.category);
+
+        // Style check
+        const matchStyle = (this.selectedStyle === 'Todos') || (item.style === this.selectedStyle);
+
+        // Search text check
+        const query = this.searchQuery.toLowerCase().trim();
+        const matchSearch = !query || 
+          item.title.toLowerCase().includes(query) ||
+          item.description.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query) ||
+          item.style.toLowerCase().includes(query) ||
+          item.tags.some(tag => tag.toLowerCase().includes(query));
+
+        return matchCategory && matchStyle && matchSearch;
+      });
+
+      // Sorting
+      if (this.sortBy === 'newest') {
+        result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+      } else if (this.sortBy === 'name') {
+        result.sort((a, b) => a.title.localeCompare(b.title));
+      } else {
+        // default: featured
+        result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+      }
+
+      return result;
+    },
+
+    clearFilters() {
+      this.searchQuery = '';
+      this.selectedCategory = 'Todos';
+      this.selectedStyle = 'Todos';
+      this.sortBy = 'featured';
+    },
+
+    buildWhatsappUrl(item, isDemo = false) {
+      const action = isDemo ? 'ver el demo en vivo' : 'cotizar';
+      const text = encodeURIComponent(\`Hola Lunaweb, me interesa \${action} del diseño "\${item.title}" que vi en su catálogo web.\`);
+      return \`https://wa.me/525610683465?text=\${text}\`;
+    }
+  }`}
+>
+  <!-- Subtle lighting accents -->
+  <GlowOrb color="gold" size="xl" className="-top-10 right-10 opacity-20" />
+  <GlowOrb color="lavender" size="lg" className="top-1/2 -left-20 opacity-20" />
+
+  <!-- Search & Filter Controls Card -->
+  <div class="p-6 sm:p-8 rounded-3xl bg-night-900/90 border border-night-700/80 backdrop-blur-xl shadow-2xl mb-12">
+    
+    <!-- Top row: Search input + Sorting -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
+      
+      <!-- Search Input -->
+      <div class="md:col-span-8 relative">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-silver">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <input
+          type="text"
+          x-model="searchQuery"
+          placeholder="Buscar por temática, evento, color (ej. 'Luna', 'Boda', 'Esmeralda', 'Vals')..."
+          class="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-night-950 border border-night-700 focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 text-warm-white placeholder-muted-silver/60 text-sm outline-none transition-all shadow-inner"
+        />
+
+        <!-- Clear Search button -->
+        <button
+          type="button"
+          x-show="searchQuery.length > 0"
+          @click="searchQuery = ''"
+          class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted-silver hover:text-warm-white"
+          aria-label="Limpiar búsqueda"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Sort Dropdown -->
+      <div class="md:col-span-4 flex items-center gap-2">
+        <label for="sort-select" class="text-xs uppercase tracking-wider text-muted-silver/80 whitespace-nowrap font-medium">
+          Ordenar:
+        </label>
+        <select
+          id="sort-select"
+          x-model="sortBy"
+          class="w-full py-3.5 px-4 rounded-2xl bg-night-950 border border-night-700 focus:border-gold-500 text-warm-white text-sm outline-none cursor-pointer transition-colors"
+        >
+          <option value="featured">✨ Más Populares</option>
+          <option value="newest">🌟 Recientes / Novedades</option>
+          <option value="name">🔤 Nombre (A-Z)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="mb-5">
+      <div class="text-xs uppercase tracking-wider text-gold-400 font-semibold mb-2.5 flex items-center justify-between">
+        <span>Filtrar por tipo de evento</span>
+        <button
+          type="button"
+          x-show="selectedCategory !== 'Todos' || selectedStyle !== 'Todos' || searchQuery.length > 0"
+          @click="clearFilters()"
+          class="text-xs text-lavender-300 hover:text-lavender-200 underline lowercase"
+        >
+          Restablecer filtros
+        </button>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        {CATALOG_CATEGORIES.map((category) => (
+          <button
+            type="button"
+            @click={`selectedCategory = '${category}'`}
+            :class={`selectedCategory === '${category}' ? 'bg-gold-500 text-night-950 font-bold shadow-[0_0_15px_rgba(201,168,118,0.4)] scale-105' : 'bg-night-950 text-muted-silver border border-night-700/80 hover:text-warm-white hover:border-gold-500/40'`}
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer"
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Style Filter Pills -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-muted-silver/80 font-medium mb-2">
+        Estilo / Atmósfera
+      </div>
+      <div class="flex flex-wrap gap-1.5 sm:gap-2">
+        {CATALOG_STYLES.map((style) => (
+          <button
+            type="button"
+            @click={`selectedStyle = '${style}'`}
+            :class={`selectedStyle === '${style}' ? 'bg-lavender-500/20 text-lavender-300 border-lavender-400/50 font-semibold' : 'bg-night-950/60 text-muted-silver/80 border-night-800 hover:text-warm-white hover:border-night-700'`}
+            class="px-3 py-1.5 rounded-lg border text-xs transition-colors cursor-pointer"
+          >
+            {style}
+          </button>
+        ))}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Status / Results Counter Bar -->
+  <div class="flex items-center justify-between mb-8 px-2">
+    <div class="text-sm text-muted-silver flex items-center gap-2">
+      <span>Mostrando</span>
+      <span class="font-bold text-warm-white font-mono" x-text="filteredItems.length"></span>
+      <span>de {totalCount} modelos exclusivos</span>
+    </div>
+
+    <div class="hidden sm:flex items-center gap-2 text-xs text-gold-400/80">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span>Disponibilidad inmediata para personalización</span>
+    </div>
+  </div>
+
+  <!-- Catalog Items Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <template x-for="item in filteredItems" :key="item.id">
+      <div class="group relative rounded-3xl overflow-hidden bg-night-900 border border-night-700/70 hover:border-gold-500/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.85),0_0_25px_rgba(201,168,118,0.2)] flex flex-col justify-between">
+        
+        <!-- Image Preview Frame -->
+        <div class="relative aspect-[4/3] w-full overflow-hidden bg-night-950">
+          <img
+            :src="item.image"
+            :alt="'Diseño de invitación: ' + item.title"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+
+          <!-- Gradient veil -->
+          <div class="absolute inset-0 bg-gradient-to-t from-night-950 via-night-950/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity"></div>
+
+          <!-- Badges on top -->
+          <div class="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md bg-night-950/80 border border-gold-500/30 text-gold-300 shadow-sm"
+              x-text="item.category"
+            ></span>
+
+            <div class="flex items-center gap-1.5">
+              <template x-if="item.isNew">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-lavender-500 text-night-950 shadow-sm">
+                  Nuevo
+                </span>
+              </template>
+              <template x-if="item.featured">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold-400 text-night-950 shadow-sm">
+                  Popular
+                </span>
+              </template>
+            </div>
+          </div>
+
+          <!-- Palette Color Preview Dots on Image Corner -->
+          <div class="absolute bottom-3 left-4 z-10 flex items-center gap-1.5 bg-night-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+            <span class="text-[10px] text-muted-silver/90 font-medium mr-1" x-text="item.paletteName"></span>
+            <template x-for="color in item.paletteColors" :key="color">
+              <span class="w-3 h-3 rounded-full border border-white/20 shadow-xs" :style="'background-color: ' + color"></span>
+            </template>
+          </div>
+        </div>
+
+        <!-- Card Body Content -->
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <!-- Style Pill -->
+            <div class="text-[11px] uppercase tracking-wider text-lavender-300 font-semibold mb-1" x-text="item.style"></div>
+
+            <!-- Title -->
+            <h3 class="font-serif text-2xl font-bold text-warm-white group-hover:text-gold-300 transition-colors leading-snug" x-text="item.title"></h3>
+
+            <!-- Description -->
+            <p class="mt-2 text-sm text-muted-silver font-light leading-relaxed" x-text="item.description"></p>
+
+            <!-- Features Tags -->
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <template x-for="tag in item.tags" :key="tag">
+                <span class="px-2 py-0.5 rounded-md bg-night-950 text-muted-silver text-[11px] border border-night-800" x-text="tag"></span>
+              </template>
+            </div>
+          </div>
+
+          <!-- Card Actions (Demo & WhatsApp Quote) -->
+          <div class="mt-6 pt-5 border-t border-night-800/90 grid grid-cols-2 gap-2">
+            <!-- Ver Demo Button -->
+            <a
+              :href="item.demoUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="py-2.5 px-3 rounded-xl bg-night-800 hover:bg-night-700 border border-night-700 hover:border-gold-500/40 text-warm-white text-xs font-semibold text-center transition-all flex items-center justify-center gap-1.5"
+            >
+              <svg class="w-3.5 h-3.5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span>Ver Demo</span>
+            </a>
+
+            <!-- Cotizar WhatsApp Button -->
+            <a
+              :href="buildWhatsappUrl(item, false)"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 text-night-950 text-xs font-bold text-center shadow-md shadow-gold-500/20 hover:shadow-gold-500/40 transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02]"
+            >
+              <svg class="w-3.5 h-3.5 text-night-950" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.044.072.044.419-.1 1.024z"/>
+              </svg>
+              <span>Cotizar</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </template>
+  </div>
+
+  <!-- Empty state fallback when filters return 0 results -->
+  <div
+    x-show="filteredItems.length === 0"
+    x-cloak
+    class="text-center py-20 px-6 rounded-3xl bg-night-900/60 border border-night-800 my-8"
+  >
+    <div class="w-16 h-16 rounded-full bg-gold-500/10 text-gold-400 border border-gold-500/30 mx-auto flex items-center justify-center mb-4">
+      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+    <h4 class="font-serif text-2xl font-bold text-warm-white mb-2">
+      No encontramos un modelo con esos filtros exactos
+    </h4>
+    <p class="text-sm text-muted-silver max-w-md mx-auto mb-6 font-light">
+      ¡No te preocupes! Recuerda que todos nuestros diseños son adaptables o podemos crear uno 100% único a partir de tu idea o fotos de referencia.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <button
+        type="button"
+        @click="clearFilters()"
+        class="px-6 py-2.5 rounded-full text-xs font-semibold text-warm-white bg-night-800 border border-night-700 hover:border-gold-500/40"
+      >
+        Limpiar filtros
+      </button>
+      <a
+        href="https://wa.me/525610683465?text=Hola%20Lunaweb,%20tengo%20una%20tem%C3%A1tica%20especial%20para%20mi%20evento%20y%20quiero%20cotizar%20un%20dise%C3%B1o%20desde%20cero"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-6 py-2.5 rounded-full text-xs font-bold text-night-950 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 shadow-md"
+      >
+        Pedir diseño personalizado desde cero
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Personalized Design Assurance Banner -->
+  <div class="mt-20 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-night-900 via-[#131A2B] to-night-900 border border-gold-500/30 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8">
+    <div class="space-y-3 max-w-xl">
+      <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-gold-400 font-semibold">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+        </svg>
+        Diseño Exclusivo a Medida
+      </span>
+      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-warm-white leading-tight">
+        ¿Tienes una temática especial o ya tienes tu paleta de colores?
+      </h3>
+      <p class="text-sm text-muted-silver font-light leading-relaxed">
+        Podemos crear tu invitación digital a partir de tu vestido, flores, salón o tablero de Pinterest. Trabajamos con el esquema de <strong class="text-warm-white">50% de anticipo y 50% al aprobar</strong>.
+      </p>
+    </div>
+
+    <a
+      href="https://wa.me/525610683465?text=Hola%20Lunaweb,%20quiero%20cotizar%20un%20dise%C3%B1o%20personalizado%20desde%20cero%20para%20mi%20evento"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="px-8 py-4 rounded-full text-sm font-semibold text-night-950 bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400 hover:from-gold-300 hover:to-gold-400 shadow-[0_0_25px_rgba(201,168,118,0.35)] transition-all hover:scale-105 flex-shrink-0 flex items-center gap-2"
+    >
+      <svg class="w-4 h-4 text-night-950" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.044.072.044.419-.1 1.024z"/>
+      </svg>
+      <span>Cotizar diseño a la medida</span>
+    </a>
+  </div>
+
+</div>

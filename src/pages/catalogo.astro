@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GlowOrb from "../components/common/GlowOrb.astro";
+import CatalogExplorer from "../components/catalog/CatalogExplorer.astro";
+---
+
+<Layout
+  title="Catálogo de Invitaciones Digitales Exclusivas | Lunaweb"
+  description="Explora todos los modelos y catálogos de invitaciones digitales para bodas, XV años, bautizos y cumpleaños. Diseños interactivos con música, RSVP y mapas."
+  isSubpage={true}
+>
+  <div class="relative pt-32 pb-24 bg-night-950 overflow-hidden min-h-screen">
+    <!-- Ambient glows -->
+    <GlowOrb color="gold" size="xl" className="-top-24 -left-20 opacity-30 animate-twinkle" />
+    <GlowOrb color="lavender" size="xl" className="top-1/4 -right-24 opacity-25" />
+    <GlowOrb color="gold" size="md" className="bottom-20 left-1/3 opacity-20" />
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-muted-silver mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-gold-400 transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span>Inicio</span>
+        </a>
+        <span class="text-night-700">/</span>
+        <span class="text-gold-300 font-medium">Catálogo Exclusivo</span>
+      </nav>
+
+      <!-- Header Section of Catalog Page -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-night-900 border border-gold-500/30 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(201,168,118,0.15)]">
+          <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+          <span class="text-xs uppercase tracking-wider font-semibold text-gold-300">
+            Colección Completa Lunaweb
+          </span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-warm-white tracking-tight leading-tight">
+          Catálogo de <span class="text-gradient-luna font-bold italic">Invitaciones Digitales</span>
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-muted-silver font-light max-w-2xl mx-auto leading-relaxed">
+          Descubre todas nuestras creaciones interactivas. Cada diseño incluye confirmación RSVP vía WhatsApp, enlace a Google Maps y Waze, música de fondo, fotos y cuenta regresiva.
+        </p>
+
+        <!-- Quick Value Badges -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-silver">
+          <span class="px-3.5 py-1.5 rounded-full bg-night-900/80 border border-night-700/80 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Personalización completa de colores y textos
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-night-900/80 border border-night-700/80 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Entrega express en 48-72h
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-night-900/80 border border-night-700/80 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-lavender-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            50% anticipo / 50% al aprobar
+          </span>
+        </div>
+      </div>
+
+      <!-- Dedicated Standalone Catalog Explorer -->
+      <CatalogExplorer />
+
+    </div>
+  </div>
+</Layout>

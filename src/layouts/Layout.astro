@@ -1,0 +1,173 @@
+---
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  isSubpage?: boolean;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Lunaweb | Invitaciones Digitales Personalizadas Elegantes",
+  description = "Diseño y desarrollo de invitaciones digitales interactivas para bodas, XV años, bautizos y cumpleaños. Confirmación RSVP por WhatsApp, Google Maps, música y cuenta regresiva.",
+  isSubpage = false,
+  canonicalUrl = "https://lunaweb.com",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth bg-night-950 text-warm-white">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" content="#0B0F19" />
+    <meta name="author" content="Lunaweb" />
+    <meta name="keywords" content="invitaciones digitales, invitaciones XV años, invitaciones para bodas, invitaciones interactivas, invitaciones digitales méxico, RSVP whatsapp, invitaciones elegantes" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Lunaweb" />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Google Fonts: Cormorant Garamond (Serif Elegante) & Plus Jakarta Sans (Sans-serif Moderna) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-night-950 text-warm-white font-sans antialiased min-h-screen flex flex-col selection:bg-gold-500/30 selection:text-warm-white">
+    
+    <!-- Skip to main content for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-gold-500 text-night-950 font-bold rounded-lg shadow-lg"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <!-- Header Navigation -->
+    <Header isSubpage={isSubpage} />
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer isSubpage={isSubpage} />
+
+    <!-- GSAP & ScrollTrigger Animations Client Script -->
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Check if user prefers reduced motion
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!prefersReducedMotion) {
+        // Hero entrance timeline
+        const heroTl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.9 } });
+
+        heroTl
+          .from(".hero-badge", { opacity: 0, y: -20, delay: 0.1 })
+          .from(".hero-title", { opacity: 0, y: 30, duration: 1 }, "-=0.6")
+          .from(".hero-subtitle", { opacity: 0, y: 20 }, "-=0.7")
+          .from(".hero-cta", { opacity: 0, y: 20 }, "-=0.6")
+          .from(".hero-features", { opacity: 0, y: 15 }, "-=0.5")
+          .from(".hero-mockup", { opacity: 0, scale: 0.92, duration: 1.2, ease: "power2.out" }, "-=0.9");
+
+        // Section headers fade up on scroll
+        const headers = [".feature-header", ".portfolio-header", ".how-it-works-header", ".faq-header", ".contact-header"];
+        headers.forEach((selector) => {
+          const el = document.querySelector(selector);
+          if (el) {
+            gsap.from(el, {
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+              opacity: 0,
+              y: 35,
+              duration: 0.9,
+              ease: "power2.out",
+            });
+          }
+        });
+
+        // Features grid stagger
+        const featureCards = document.querySelectorAll(".features-grid > div");
+        if (featureCards.length > 0) {
+          gsap.from(featureCards, {
+            scrollTrigger: {
+              trigger: ".features-grid",
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+          });
+        }
+
+        // Steps grid stagger
+        const stepsCards = document.querySelectorAll(".steps-grid > div");
+        if (stepsCards.length > 0) {
+          gsap.from(stepsCards, {
+            scrollTrigger: {
+              trigger: ".steps-grid",
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            opacity: 0,
+            y: 45,
+            duration: 0.85,
+            stagger: 0.15,
+            ease: "power2.out",
+          });
+        }
+
+        // Contact buttons
+        const contactButtons = document.querySelector(".contact-buttons");
+        if (contactButtons) {
+          gsap.from(contactButtons, {
+            scrollTrigger: {
+              trigger: contactButtons,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: "power2.out",
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

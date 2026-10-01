@@ -1,0 +1,33 @@
+---
+interface Props {
+  color?: "gold" | "lavender" | "blue";
+  size?: "sm" | "md" | "lg" | "xl";
+  className?: string;
+}
+
+const { color = "gold", size = "md", className = "" } = Astro.props;
+
+const colorClasses = {
+  gold: "from-gold-500/20 via-gold-400/10 to-transparent",
+  lavender: "from-lavender-500/20 via-lavender-400/10 to-transparent",
+  blue: "from-night-700/40 via-lavender-600/15 to-transparent",
+};
+
+const sizeClasses = {
+  sm: "w-48 h-48 blur-2xl",
+  md: "w-80 h-80 blur-3xl",
+  lg: "w-[480px] h-[480px] blur-[100px]",
+  xl: "w-[650px] h-[650px] blur-[140px]",
+};
+---
+
+<div
+  class:list={[
+    "absolute pointer-events-none rounded-full bg-gradient-to-tr -z-10 mix-blend-screen opacity-70",
+    colorClasses[color],
+    sizeClasses[size],
+    className,
+  ]}
+  aria-hidden="true"
+>
+</div>

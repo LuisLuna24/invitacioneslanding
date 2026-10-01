@@ -1,0 +1,147 @@
+---
+import GlowOrb from "../common/GlowOrb.astro";
+import PortfolioCard from "./PortfolioCard.astro";
+
+const categories = ["Todos", "XV Años", "Boda", "Bautizo", "Cumpleaños"];
+
+const portfolioItems = [
+  {
+    title: "Minimal Classic",
+    category: "Boda",
+    themeDescription: "Tonos azul hielo y blanco, tipografía editorial con serifas, contador regresivo y mapa.",
+    image: "/img/f1.jpg",
+    previewUrl: "https://boda1lunaweb.netlify.app/",
+    tagColor: "lavender",
+  },
+  {
+    title: "Romantic Classic",
+    category: "Boda",
+    themeDescription: "Diseño elegante sobre fotografía con tonos cálidos, tipografía caligráfica y sección de padres.",
+    image: "/img/f2.jpg",
+    previewUrl: "https://boda2lunaweb.netlify.app/",
+    tagColor: "lavender",
+  },
+  {
+    title: "Boda Mildre & Luis — Historia de Amor",
+    category: "Boda",
+    themeDescription: "Fotografía de portada, cuenta regresiva, sección de historia con monograma y recepción.",
+    image: "/img/f3.jpg",
+    previewUrl: "https://boda3lunaweb.netlify.app/",
+    tagColor: "lavender",
+  },
+  {
+    title: "Gala de Quinceañera",
+    category: "XV Años",
+    themeDescription: "Diseño sofisticado con monograma plateado, fecha detallada, itinerario y mesa de regalos.",
+    image: "/img/f4.jpg",
+    previewUrl: "https://xv1lunaweb.netlify.app/",
+    tagColor: "lavender",
+  },
+  {
+    title: "Midnight Gold",
+    category: "XV Años",
+    themeDescription: "Fondo verde noche, destellos dorados, contador en tiempo real y secciones para padrinos.",
+    image: "/img/f5.jpg",
+    previewUrl: "https://xv2lunaweb.netlify.app/",
+    tagColor: "lavender",
+  }
+];
+
+
+const whatsappUrl = "https://wa.me/525610683465?text=Hola,%20quiero%20cotizar%20un%20dise%C3%B1o%20personalizado%20para%20mi%20evento";
+---
+
+<section id="portafolio" class="relative py-28 bg-night-950 overflow-hidden" x-data="{ currentFilter: 'Todos' }">
+  <!-- Glowing accents -->
+  <GlowOrb color="gold" size="lg" className="-top-24 right-1/4 opacity-25" />
+  <GlowOrb color="lavender" size="xl" className="bottom-10 left-10 opacity-20" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 portfolio-header">
+      <span class="inline-block text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
+        Galería de Proyectos
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-warm-white tracking-tight">
+        Diseños creados para <span class="text-gradient-luna font-bold italic">momentos inolvidables</span>
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-muted-silver font-light">
+        Explora nuestros estilos más solicitados. Cada invitación se adapta 100% a los colores, temática y detalles de tu celebración.
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs (Alpine.js) -->
+    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12 portfolio-filters">
+      {categories.map((cat) => (
+        <button
+          type="button"
+          @click={`currentFilter = '${cat}'`}
+          :class={`currentFilter === '${cat}' ? 'bg-gold-500 text-night-950 font-semibold shadow-[0_0_15px_rgba(201,168,118,0.4)] scale-105' : 'bg-night-900 text-muted-silver border border-night-700/80 hover:text-warm-white hover:border-gold-500/30'`}
+          class="px-5 py-2 rounded-full text-xs sm:text-sm transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Portfolio 3-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 portfolio-grid">
+      {portfolioItems.map((item) => (
+        <div
+          x-show={`currentFilter === 'Todos' || currentFilter === '${item.category}'`}
+          x-transition:enter="transition ease-out duration-300"
+          x-transition:enter-start="opacity-0 scale-95"
+          x-transition:enter-end="opacity-100 scale-100"
+        >
+          <PortfolioCard
+            title={item.title}
+            category={item.category}
+            themeDescription={item.themeDescription}
+            image={item.image}
+            previewUrl={item.previewUrl}
+            tagColor={item.tagColor}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Callout -->
+    <div class="mt-16 p-8 rounded-3xl bg-gradient-to-r from-night-900 via-night-800 to-night-900 border border-gold-500/20 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-10 -top-10 w-40 h-40 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      
+      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-warm-white mb-2">
+        ¿Tienes una temática o paleta de colores especial?
+      </h3>
+      <p class="text-sm sm:text-base text-muted-silver max-w-xl mx-auto mb-6 font-light">
+        Creamos invitaciones personalizadas desde cero según tu inspiración (Pinterest, vestido, decoración del salón o tus fotos).
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/catalogo"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold text-warm-white bg-night-950 border border-gold-500/40 hover:border-gold-400 hover:bg-night-800 shadow-[0_0_20px_rgba(201,168,118,0.2)] transition-all hover:scale-105"
+        >
+          <svg class="w-4 h-4 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+          <span>Explorar Catálogo Completo</span>
+        </a>
+
+        <a
+          href="#contacto"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold text-night-950 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 shadow-[0_0_20px_rgba(201,168,118,0.3)] transition-all hover:scale-105"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.044.072.044.419-.1 1.024z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.66 1.443 5.176L2 22l4.981-1.306C8.423 21.535 10.154 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25c-1.637 0-3.15-.466-4.437-1.272l-.318-.2-2.964.777.791-2.89-.208-.331C3.993 14.996 3.5 13.546 3.5 12c0-4.687 3.813-8.5 8.5-8.5 4.687 0 8.5 3.813 8.5 8.5 0 4.688-3.813 8.5-8.5 8.5z"/>
+          </svg>
+          <span>Cotizar a la medida</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
