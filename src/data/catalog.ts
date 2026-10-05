@@ -66,7 +66,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
   },
   {
     id: "boda-mildre-luis-full",
-    title: "Boda Mildre & Luis — Historia de Amor",
+    title: "Romantic Traditional",
     category: "Boda",
     style: "Romántico & Tradicional",
     description: "Invitación interactiva con fotografía de portada, cuenta regresiva en tiempo real, sección 'Nuestra Historia de Amor' con monograma personalizado, y detalles de ceremonia y recepción con Google Maps.",
@@ -108,7 +108,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
   },
   {
     id: "boda-mildre-luis-pedida",
-    title: "Boda Mildre & Luis — Nuestra Pedida",
+    title: "Elegant Gold",
     category: "Boda",
     style: "Romántico & Crema Elegante",
     description: "Invitación interactiva con reproductor de música, cuenta regresiva en tiempo real, galería de fotos con carrusel, detalles de recepción y botón directo para confirmar asistencia por WhatsApp.",
