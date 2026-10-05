@@ -2,7 +2,7 @@ export interface CatalogItem {
   id: string;
   title: string;
   category: "Boda" | "XV Años" | "Bautizo" | "Cumpleaños" | "Baby Shower" | "Primera Comunión" | "Graduación";
-  style: "Nocturno & Lujo" | "Romántico & Floral" | "Minimalista & Moderno" | "Celestial & Gold" | "Boho & Jardín" | "Clásico & Romántico" | "Romántico & Tradicional" | "Gala Elegante & Monograma" | "Noche & Dorado Elegante";
+  style: "Nocturno & Lujo" | "Romántico & Floral" | "Minimalista & Moderno" | "Celestial & Gold" | "Boho & Jardín" | "Clásico & Romántico" | "Romántico & Tradicional" | "Gala Elegante & Monograma" | "Noche & Dorado Elegante" | "Romántico & Crema Elegante";
   description: string;
   image: string;
   tags: string[];
@@ -43,7 +43,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     category: "Boda",
     style: "Minimalista & Moderno",
     description: "Estética limpia y sofisticada con paleta en tonos azul hielo y blanco, tipografía editorial con serifas, contador regresivo integrado y acceso directo a mapa y menú.",
-    image: "/img/f1.jpg",
+    image: "/img/f1.webp",
     tags: ["Menú Hamburguesa", "Cuenta Regresiva", "Google Maps", "RSVP Web", "Fotografías"],
     paletteName: "Azul Cielo & Blanco",
     paletteColors: ["#E8EEF5", "#1B3A5C", "#4A7C9D"],
@@ -56,7 +56,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     category: "Boda",
     style: "Clásico & Romántico",
     description: "Diseño elegante y tradicional sobre fotografía de fondo con tonos cálidos, tipografía caligráfica sofisticada, sección de padrinos y padres, y frase emotiva.",
-    image: "/img/f2.jpg",
+    image: "/img/f2.webp",
     tags: ["Ceremonia", "Padres y Padrinos", "RSVP WhatsApp", "Google Maps", "Galería"],
     paletteName: "Beige Cálido & Crema",
     paletteColors: ["#D4C4A8", "#F5F2EB", "#2C2C2C"],
@@ -70,7 +70,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     category: "Boda",
     style: "Romántico & Tradicional",
     description: "Invitación interactiva con fotografía de portada, cuenta regresiva en tiempo real, sección 'Nuestra Historia de Amor' con monograma personalizado, y detalles de ceremonia y recepción con Google Maps.",
-    image: "/img/f3.jpg",
+    image: "/img/f3.webp",
     tags: ["Cuenta Regresiva", "Nuestra Historia", "Google Maps", "Ceremonia Religiosa", "Recepción", "RSVP"],
     paletteName: "Crema & Oscuro Sofisticado",
     paletteColors: ["#F9F6F0", "#2C2C2C", "#C5A059"],
@@ -83,7 +83,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     category: "XV Años",
     style: "Gala Elegante & Monograma",
     description: "Invitación de XV años con diseño clásico y sofisticado, monograma plateado ornamentado, fecha detallada, contador regresivo, itinerario de recepción con ubicación y sección de mesa de regalos.",
-    image: "/img/f4.jpg",
+    image: "/img/f4.webp",
     tags: ["Monograma", "Cuenta Regresiva", "Google Maps", "Mesa de Regalos", "Itinerario"],
     paletteName: "Rojo, Negro & Plata",
     paletteColors: ["#490912", "#1C1C1C", "#C0C0C0"],
@@ -98,7 +98,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     category: "XV Años",
     style: "Noche & Dorado Elegante",
     description: "Invitación interactiva con fondo verde noche y destellos dorados, tipografía clásica con serifas, contador regresivo en tiempo real y secciones dedicadas a padres y padrinos.",
-    image: "/img/f5.jpg",
+    image: "/img/f5.webp",
     tags: ["Cuenta Regresiva", "Padres y Padrinos", "Diseño Nocturno", "RSVP Web", "Animación"],
     paletteName: "Verde Noche & Oro",
     paletteColors: ["#0B2217", "#D4AF37", "#133023"],
@@ -106,4 +106,18 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     isNew: true,
     demoUrl: "https://xv2lunaweb.netlify.app/",
   },
+  {
+    id: "boda-mildre-luis-pedida",
+    title: "Boda Mildre & Luis — Nuestra Pedida",
+    category: "Boda",
+    style: "Romántico & Crema Elegante",
+    description: "Invitación interactiva con reproductor de música, cuenta regresiva en tiempo real, galería de fotos con carrusel, detalles de recepción y botón directo para confirmar asistencia por WhatsApp.",
+    image: "/img/f6.webp",
+    tags: ["Música", "Cuenta Regresiva", "Galería", "Google Maps", "RSVP WhatsApp"],
+    paletteName: "Crema & Dorado Suave",
+    paletteColors: ["#FAF7F2", "#C5A059", "#2C2C2C"],
+    featured: true,
+    isNew: true,
+  }
+
 ];
